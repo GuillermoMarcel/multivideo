@@ -1,0 +1,218 @@
+html,
+body {
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+.div_viewer {
+    position: relative;
+    border: none;
+    background-color: #000;
+}
+
+.player,
+.iframe,
+iframe {
+    float: left;
+    z-index: 0;
+}
+
+.iframe,
+iframe {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+#control_panel {
+    position: absolute;
+    border-radius: 5px;
+    z-index: 100;
+    width: 320px;
+    height: 100px;
+    /* height: 60px; */
+    background-color: #000;
+    opacity: 0.4;
+    /* cursor: move; */
+}
+
+#control_panel:hover {
+    opacity: 0.9;
+}
+
+.playbtn {
+    position: absolute;
+    top: 52px;
+    /* top: 12px; */
+    left: 145px;
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    width: 0;
+    height: 30px;
+    border-color: transparent transparent transparent #202020;
+    transition: 100ms all ease;
+    cursor: pointer;
+    border-style: solid;
+    border-width: 15px 0 15px 30px;
+}
+
+.playbtn.paused {
+    border-style: double;
+    border-width: 0px 0 0px 30px;
+}
+
+.playbtn:hover {
+    border-color: transparent transparent transparent #404040;
+}
+
+.resetSyncbtn {
+    position: absolute;
+    top: 43px;
+    /* top: 3px; */
+    left: 3px;
+    background: transparent;
+    color: #202020;
+    font-size: 1.3rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.resetSyncbtn:hover {
+    color: #e44d7a;
+}
+
+.soundbtn {
+    position: absolute;
+    top: 3px;
+    /* left: 3px; */
+    background: transparent;
+    color: #202020;
+    font-size: 1.3rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+.soundbtn:hover {
+    color: #574de4;
+}
+
+.muteAll {
+    position: absolute;
+    top: 3px;
+    /* left: 3px; */
+    right: 10px;
+    background: transparent;
+    color: #202020;
+    font-size: 1.3rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.muteAll.muted {
+    color: #a62828;
+}
+
+.muteAll:hover {
+    color: #ff0000;
+}
+
+.syncbtn {
+    position: absolute;
+    top: 43px;
+    /* top: 3px; */
+    left: 29px;
+    background: transparent;
+    color: #202020;
+    font-size: 1.3rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.syncbtn:hover {
+    color: #583df5;
+}
+
+.ratiobtn {
+    position: absolute;
+    top: 43px;
+    /* top: 3px; */
+    left: 59px;
+    background: transparent;
+    color: #202020;
+    font-size: 1.3rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.ratiobtn:hover {
+    color: #5ec4f6;
+}
+
+.panel_range {
+    position: absolute;
+    top: 100px;
+    /* top: 60px; */
+    left: -2px;
+    width: 100%;
+}
+
+.panel_range input {
+    width: 100%;
+    cursor: ew-resize;
+    height: 5px;
+}
+
+.panel_time {
+    color: #aaa;
+    position: absolute;
+    top: 75px;
+    /* top: 35px; */
+    left: 5px;
+    height: 10px;
+    font-size: 0.8rem;
+}
+
+.autoVolume {
+    position: absolute;
+    top: 43px;
+    /* top: 3px; */
+    right: 0px;
+    background: transparent;
+    color: #202020;
+    font-size: 1rem;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+#autoVolumeSec {
+    position: absolute;
+    top: 68px;
+    /* top: 28px; */
+    right: 2px;
+    width: 40px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+}
+
+.autoVolume:hover {
+    color: #404040;
+}
+
+.autoVolume.auto {
+    color: green;
+}
