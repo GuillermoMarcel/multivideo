@@ -16,12 +16,12 @@ Example
 Use Online:
 
 You can use, for now, use the version I have deployed here:
-```
+
 https://multivideo.francelsoft.com/?videos=....
 
 ex.
 https://multivideo.francelsoft.com/?videos=4e8Iw3Frf1A,cb12KmMMDJA
-```
+
 
 Shortcuts:
 * 1, 2, 3... : Hear the n videos, silence everything else
