@@ -18,3 +18,5 @@ Shortcuts:
 * 1, 2, 3... : Hear the n videos, silence everything else
 * m: Mute all
 * Ctrl + 1: Load the video you have in the clipboard in the first position
+
+![alt text](https://github.com/GuillermoMarcel/multivideo/blob/master/extras/screenshot.png?raw=true)
