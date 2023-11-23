@@ -17,12 +17,6 @@ var moveRange = false;
 var playing = false;
 var vRatio = { 'width': 16, 'height': 9 };
 
-$("#mute_1").on('click', function (e) {
-    if (e.which == 2) {
-        e.preventDefault();
-        alert("middle button");
-    }
-});
 
 // Yvideo Class
 function Yvideo() {
@@ -401,7 +395,6 @@ function loadClip(vi) {
 }
 
 function loadByURL(vi, url) {
-    // https://www.youtube.com/watch?v=cb12KmMMDJA
     id = url.split("v=")[1];
     videos[vi].player.loadVideoById(id)
 }

@@ -1,18 +1,11 @@
 //---------------------------------------------------------------
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    // if (document.getElementById(elmnt.id)) {
-    //     document.getElementById(elmnt.id).onmousedown = dragMouseDown;
-    // } else {
-    //     elmnt.onmousedown = dragMouseDown;
-    // }
-
     elmnt.onmousedown = dragMouseDown;
-
 
     function dragMouseDown(e) {
         var firstInPath = e.composedPath()[0]
-        if (firstInPath.id == 'formControlRange' || firstInPath.id == 'autoVolumeSec') { return }//pass input[range]
+        if (firstInPath.id == 'formControlRange' || firstInPath.id == 'autoVolumeSec') { return }
         e = e || window.event;
         e.preventDefault();
         pos3 = e.clientX;
