@@ -133,11 +133,17 @@ function onPlayerReady(event) {
 
 function onAllPlayerReady() {
     console.log("all loaded")
-    if (!videos.every(v => v.player.getPlayerState() == 1)) {
-        videos.forEach(x => x.player.getPlayerState() != 1 ? x.player.playVideo() : "")
+
+    var unready = videos.filter(x => x.player.getVideoData().isPlayable && x.player.getPlayerState() != 1);
+
+    if (unready.length > 0) {
+        console.log("Unready videos: " + unready.length)
+        unready.forEach(x => x.player.playVideo())
         setTimeout(onAllPlayerReady, 1000)
         return;
     }
+
+
 
     console.log("all playing")
     hear(0)
