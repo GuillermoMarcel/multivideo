@@ -4,7 +4,7 @@ function getVideosFromChannels(chIds) {
 
 
     chIds.forEach(chId => {
-        var url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=1&q=${encodeURIComponent(chId)}&type=video&key=${api_key}`
+        var url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&eventType=live&maxResults=1&q=${chId}&type=video&key=${api_key}`
         fetch(url)
             .then(response => response.json())
             .then(response => {
