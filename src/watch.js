@@ -99,6 +99,7 @@ function muteAll() {
 
 //base 0
 function hear(vi) {
+    console.log("hearing", vi)
     videos.forEach(v => {
         if (v.id == vi) {
             v.muteBtn.style.color = hearingColor
@@ -219,12 +220,11 @@ function createPanel(videosIds) {
         btn.setAttribute("data-placement", "top")
         btn.onclick = x => hear(id)
 
-        btn.setAttribute("title", "Audio " + i++)
+        btn.setAttribute("title", `Audio ${i++}`)
 
         btn.style.left = currLeft + "px";
         currLeft += 30
 
-        btn.setAttribute("lef", currLeft)
         var spn = document.createElement("i")
         spn.className = "fas fa-volume-up"
 
@@ -232,6 +232,43 @@ function createPanel(videosIds) {
 
         soundsDiv.appendChild(btn)
     });
+}
+
+function addNewVideo(videoId) {
+    let id = vCount++
+
+
+    var btn = document.createElement('button');
+    btn.className = "soundbtn"
+    btn.id = "mute_" + id;
+    btn.setAttribute('data-toggle', "tooltip")
+    btn.setAttribute("data-placement", "top")
+
+    btn.setAttribute("title", `Audio ${id + 1}`)
+
+    btn.style.left = (3 + id * 30) + "px";
+    var spn = document.createElement("i")
+    spn.className = "fas fa-volume-up"
+    btn.appendChild(spn)
+    document.getElementById('sounds').appendChild(btn)
+
+
+    params.push({ v: videoId, t: 0 })
+
+    var video = new Yvideo();
+    video.videoId = videoId;
+    video.sTime = 0;
+    video.id = id
+
+    videos[id] = video;
+    videos[id].addDiv();
+    video.muteBtn = $("#mute_" + id)[0]
+    btn.onclick = (x) => hear(id)
+
+    setSize();
+    initPanelPos();
+
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 
@@ -401,6 +438,26 @@ function loadClip(vi) {
 }
 
 function loadByURL(vi, url) {
-    id = url.split("v=")[1];
-    videos[vi].player.loadVideoById(id)
+    var params = new URLSearchParams(url)
+    var id = ""
+    if (params.has("https://www.youtube.com/watch?v")) {
+        id = params.get("https://www.youtube.com/watch?v")
+    }
+    if (params.has("v")) {
+        id = params.get("v")
+    }
+    if (id == "") {
+        console.log("id not found")
+        console.log(url)
+        console.log(`pos: ${vi} - v: ${id} - url: ${url}`)
+        return;
+    }
+
+    if (vi != -1) {
+        console.log(`Loading video: id: ${id} - pos: ${vi} - url: ${url}`)
+        videos[vi].player.loadVideoById(id)
+    } else {
+        console.log("loading new video", id, url)
+        addNewVideo(id)
+    }
 }

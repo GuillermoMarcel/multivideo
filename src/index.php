@@ -8,13 +8,20 @@
     <link href="/static/fontawesome/css/all.css" rel="stylesheet">
     <link href="/watch.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        const api_key = "<?php echo ($_ENV["YOUTUBE_KEY"]); ?>"
+    </script>
+
     <title>Multivideo - Francelsoft</title>
 
     <link href="/static/favicon.ico" rel="icon" type="image/x-icon">
 </head>
 
 <body>
-    <!--<div class="" id="addVideos"></div>-->
+    <p style="color: white">
+
+    </p>
+
 
     <div id="control_panel">
         <div class="panel_time"></div>
@@ -46,6 +53,7 @@
     </div>
     <script src="/watch.js"></script>
     <script src="/drag.js"></script>
+    <script src="/youtubeapi.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var tag = document.createElement('script');
@@ -57,6 +65,14 @@
             const videosParam = urlParams.get('videos');
             const videosIds = videosParam.split(",")
             console.log(videosIds)
+
+
+            if (urlParams.has('ch')) {
+                const channlesParam = urlParams.get('ch');
+                var chIds = channlesParam.split(",")
+
+                getVideosFromChannels(chIds)
+            }
 
             createPanel(videosIds)
 
@@ -85,12 +101,16 @@
                 e.preventDefault();
 
                 loadClip(d - 1)
-
             }
 
-            if (e.key == "m") {
+            if (e.key == "m" || d == 0) {
                 console.log("shortcut for: mute all")
                 muteAll();
+                return
+            }
+
+            if (e.key == "+") {
+                loadClip(-1)
             }
 
         });
