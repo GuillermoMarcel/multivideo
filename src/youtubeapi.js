@@ -14,7 +14,7 @@ function getVideosFromChannels(chIds) {
                 }
                 response.items.forEach(resultItem => {
                     var id = resultItem.id.videoId
-                    console.log("video found", chId, id)
+                    console.log("video found", chId, resultItem.snippet.channelTitle, id, resultItem.snippet.title)
                     addNewVideo(id)
                 })
             })

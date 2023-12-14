@@ -21,6 +21,7 @@ var vRatio = { 'width': 16, 'height': 9 };
 // Yvideo Class
 function Yvideo() {
     this.id;
+    this.componentId;
     this.url;
     this.videoId;
     this.sTime = 0;//Start time(sec)
@@ -29,10 +30,22 @@ function Yvideo() {
     this.loaded = false;
     this.status = -1;
     this.focused = false;
+    this.muteBtn;
     this.addDiv = addDivBox;
     this.setSeek = setSeek;
     this.doSync = syncTime;
-    this.muteBtn;
+
+    this.mute = () => {
+        this.player.mute()
+        this.muteBtn.style.color = silenceColor;
+        this.player.g.classList.remove("hearing")
+    }
+
+    this.hear = () => {
+        this.muteBtn.style.color = hearingColor;
+        this.player.unMute();
+        this.player.g.classList.add("hearing")
+    }
 
 }
 function syncTime(idx) {
@@ -58,39 +71,44 @@ function addDivBox() {
     var parentDiv = $('body');
     var youtubeDiv = document.createElement('div');
     youtubeDiv.classList.add('div_viewer');
-    youtubeDiv.setAttribute("id", "p_" + this.id);
+
+    this.componentId = `p_${this.id}`
+    youtubeDiv.setAttribute("id", this.componentId);
     parentDiv.append(youtubeDiv);
     // add youtube video
 
-    this.player = new YT.Player("p_" + this.id, {
-        videoId: this.videoId,
-        events: {
-            'width': '100%',
-            'height': '100%',
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange,
-        },
-        playerVars: {
-            // 'autoplay': 1,
-            "enablejsapi": 1,
-            'origin': window.location.origin,
-            "color": "white"
-        }
-    });
+    this.player = new YT.Player(
+        this.componentId,
+        {
+            videoId: this.videoId,
+            events: {
+                'width': '100%',
+                'height': '100%',
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+            },
+            playerVars: {
+                // 'autoplay': 1,
+                "mute": 1,
+                "enablejsapi": 1,
+                'origin': window.location.origin,
+                "color": "white"
+            }
+        });
 }
 // Yvideo Class End
 
 function muteAll() {
-    console.log("muting")
-
     if (isMuted) {
+        console.log("unmuting")
         hear(lastHearing)
         return
     }
+    console.log("muting")
+
 
     videos.forEach(v => {
-        v.player.mute()
-        v.muteBtn.style.color = silenceColor;
+        v.mute();
     })
 
     isMuted = true
@@ -102,16 +120,13 @@ function hear(vi) {
     console.log("hearing", vi)
     videos.forEach(v => {
         if (v.id == vi) {
-            v.muteBtn.style.color = hearingColor
-            v.player.unMute()
+            v.hear();
         } else {
-            v.muteBtn.style.color = silenceColor;
-            v.player.mute()
+            v.mute();
         }
     })
 
     lastHearing = vi
-
     isMuted = false
     muteAllBtn.removeClass("muted")
 }
@@ -235,6 +250,12 @@ function createPanel(videosIds) {
 }
 
 function addNewVideo(videoId) {
+    //exept already loaded videos
+    if (params.find(x => x.v == videoId)) {
+        console.log("Duplicated Video", videoId)
+        return
+    }
+
     let id = vCount++
 
 

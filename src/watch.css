@@ -11,8 +11,13 @@ body {
 
 .div_viewer {
     position: relative;
-    border: none;
+    border: solid;
+    border-color: black;
     background-color: #000;
+}
+
+.hearing {
+    border-color: red;
 }
 
 .player,

@@ -18,11 +18,6 @@
 </head>
 
 <body>
-    <p style="color: white">
-
-    </p>
-
-
     <div id="control_panel">
         <div class="panel_time"></div>
 
@@ -92,7 +87,6 @@
             var d = Number(e.key)
             var isNumber = d > 0 && d <= params.length
             if (!e.ctrlKey && isNumber) {
-                console.log("hearing " + (d))
                 hear(d - 1)
                 return;
             }
